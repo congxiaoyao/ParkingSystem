@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Web Socket Client</h1>
+
+<script type="text/javascript">
+    var URL = "ws://192.168.31.203:8080/ParkingSystem/websocket/test";
+    var websocket;
+
+    function connect(){
+        websocket = new WebSocket(URL);
+        websocket.onopen = function(evnt) { onOpen(evnt) };
+        websocket.onmessage = function(evnt) { onMessage(evnt) };
+        websocket.onerror = function(evnt) { onError(evnt) };
+    }
+    function sendMessage(msg) {
+        websocket.send(msg);
+    }
+    function onOpen() {
+        alert("open");
+    }
+    function onMessage(evnt) {
+        if (typeof evnt.data == "string") {
+            alert(evnt.data);
+        }
+    }
+    function onError(evnt) {
+        alert('ERROR: ' + evnt.data);
+    }
+</script>
+
+</body>
+</html>
